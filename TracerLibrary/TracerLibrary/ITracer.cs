@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace TracerLibrary
 {
     public interface ITracer
