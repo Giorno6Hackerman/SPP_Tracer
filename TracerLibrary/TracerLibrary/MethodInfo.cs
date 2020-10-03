@@ -11,8 +11,8 @@ namespace TracerLibrary
     {
         private string _name;
         private string _className;
-        private Stopwatch _time = new Stopwatch();
-
+        private Stopwatch _time;
+        private List<MethodInfo> nestedMethods;
 
         public string ClassName
         {
@@ -38,6 +38,8 @@ namespace TracerLibrary
         {
             Name = name;
             ClassName = className;
+            _time = new Stopwatch();
+            nestedMethods = new List<MethodInfo>();
         }
     }
 }
