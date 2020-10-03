@@ -15,9 +15,16 @@ namespace TracerLibrary
             threads = new ConcurrentDictionary<int, ThreadInfo>();
         }
 
-        public ThreadInfo GetThread(int id, ThreadInfo thread)
+        public ThreadInfo GetThread(int id)
         {
-            return threads.GetOrAdd(id, thread);
+            ThreadInfo thread;
+            if (!threads.TryGetValue(id, out thread))
+            {
+                thread = new ThreadInfo(id);
+                threads.TryAdd(id, thread);
+            }
+
+            return thread;
         }
 
         public ImmutableList<ThreadInfo> GetThreadList()

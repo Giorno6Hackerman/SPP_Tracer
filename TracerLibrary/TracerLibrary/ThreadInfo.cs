@@ -56,5 +56,10 @@ namespace TracerLibrary
 
             stack.Push(method);
         }
+
+        public MethodInfo DeleteMethod()
+        {
+            return stack.Pop();
+        }
     }
 }
