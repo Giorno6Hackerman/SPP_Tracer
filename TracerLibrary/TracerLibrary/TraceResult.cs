@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace TracerLibrary
 {
-    public struct TraceResult
+    public class TraceResult
     {
+        
 
     }
 }
