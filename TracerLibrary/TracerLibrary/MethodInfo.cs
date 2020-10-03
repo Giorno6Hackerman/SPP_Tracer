@@ -59,5 +59,10 @@ namespace TracerLibrary
         {
             _timer.Stop();
         }
+
+        public void AddNestedMethod(MethodInfo method)
+        {
+            _nestedMethods.Add(method);
+        }
     }
 }

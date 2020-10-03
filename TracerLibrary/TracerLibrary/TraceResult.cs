@@ -13,5 +13,10 @@ namespace TracerLibrary
         {
             threads = new ConcurrentDictionary<int, ThreadInfo>();
         }
+
+        public ThreadInfo GetThread(int id, ThreadInfo thread)
+        {
+            return threads.GetOrAdd(id, thread);
+        }
     }
 }
