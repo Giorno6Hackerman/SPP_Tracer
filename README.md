@@ -1,2 +1,2 @@
-# SPP_Tracer
-5 semester, SPP lab №1
+# Hello there
+5 semester, SPP lab №1 "Tracer"
