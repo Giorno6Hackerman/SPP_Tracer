@@ -6,7 +6,7 @@ namespace TracerLibrary
 {
     public class TraceResult
     {
-        // thread's id and info
+        // Thread's id and info.
         private ConcurrentDictionary<int, ThreadInfo> threads;
 
         public TraceResult()

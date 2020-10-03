@@ -11,8 +11,8 @@ namespace TracerLibrary
     {
         private string _name;
         private string _className;
-        private Stopwatch _time;
-        private List<MethodInfo> nestedMethods;
+        private Stopwatch _timer;
+        private List<MethodInfo> _nestedMethods;
 
         public string ClassName
         {
@@ -34,12 +34,30 @@ namespace TracerLibrary
             private set { }
         }
 
+        public long Time
+        {
+            get
+            {
+                return _timer.ElapsedMilliseconds;
+            }
+        }
+
         public MethodInfo(string name, string className)
         {
             Name = name;
             ClassName = className;
-            _time = new Stopwatch();
-            nestedMethods = new List<MethodInfo>();
+            _timer = new Stopwatch();
+            _nestedMethods = new List<MethodInfo>();
+        }
+
+        public void StartTimer()
+        {
+            _timer.Start();
+        }
+
+        public void StopTimer()
+        {
+            _timer.Stop();
         }
     }
 }
