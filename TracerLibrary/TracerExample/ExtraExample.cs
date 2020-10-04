@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using TracerLibrary;
 
 namespace TracerExample
@@ -6,46 +7,45 @@ namespace TracerExample
     public class ExtraExample
     {
         private ITracer _tracer;
+        private Random rand;
 
         public ExtraExample(ITracer tracer)
         {
             _tracer = tracer;
+            rand = new Random();
         }
 
         public void Life()
         {
             _tracer.StartTrace();
-            Thread.Sleep(41);
+            Thread.Sleep(rand.Next(1, 200));
 
             Eat();
-            Thread.Sleep(10);
+            Thread.Sleep(rand.Next(1, 200));
             Breathe();
 
-            Thread.Sleep(5);
+            Thread.Sleep(rand.Next(1, 200));
             _tracer.StopTrace();
         }
 
         public void Breathe()
         {
             _tracer.StartTrace();
-            Thread.Sleep(11);
+            Thread.Sleep(rand.Next(1, 200));
 
-            Thread eatThread = new Thread(Eat);
-            eatThread.Start();
-
-            Thread.Sleep(4);
+            Thread.Sleep(rand.Next(1, 200));
             Eat();
 
-            Thread.Sleep(54);
+            Thread.Sleep(rand.Next(1, 200));
             _tracer.StopTrace();
         }
 
         public void Eat()
         {
             _tracer.StartTrace();
-            Thread.Sleep(1);
+            Thread.Sleep(rand.Next(1, 200));
 
-            Thread.Sleep(78);
+            Thread.Sleep(rand.Next(1, 200));
             _tracer.StopTrace();
         }
     }

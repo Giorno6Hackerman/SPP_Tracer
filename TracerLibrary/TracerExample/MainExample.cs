@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using TracerLibrary;
 
 namespace TracerExample
@@ -7,63 +8,46 @@ namespace TracerExample
     {
         private ITracer _tracer;
         private ExtraExample _extra;
+        private Random rand;
 
         public MainExample(ITracer tracer)
         {
             _tracer = tracer;
             _extra = new ExtraExample(tracer);
+            rand = new Random();
         }
 
         public void Execution()
         {
             _tracer.StartTrace();
-            Thread.Sleep(100);
+            Thread.Sleep(rand.Next(1, 200));
 
-            Thread deathThread = new Thread(Death);
-            deathThread.Start();
+            Thread.Sleep(rand.Next(1, 200));
+            _extra.Eat();
 
-            Thread.Sleep(6);
-            lock (_extra)
-            {
-                _extra.Eat();
-            }
-
-            Thread sufferingThread = new Thread(Suffering);
-            sufferingThread.Start();
-
-            Thread.Sleep(666);
-            _tracer.StartTrace();
+            Thread.Sleep(rand.Next(1, 200));
+            _tracer.StopTrace();
         }
 
         public void Death()
         {
             _tracer.StartTrace();
-            Thread.Sleep(10);
+            Thread.Sleep(rand.Next(1, 200));
 
-            lock (_extra)
-            {
-                Thread extraThread = new Thread(_extra.Life);
-                extraThread.Start();
-            }
+            Thread.Sleep(666);
 
-
-            Thread.Sleep(66);
-            _tracer.StartTrace();
+            _tracer.StopTrace();
         }
 
         public void Suffering()
         {
             _tracer.StartTrace();
-            Thread.Sleep(54);
+            Thread.Sleep(rand.Next(1, 200));
 
-            lock (_extra)
-            {
-                _extra.Breathe();
-                Thread.Sleep(2);
-            }
+            _extra.Breathe();
+            Thread.Sleep(rand.Next(1, 200));
 
-            Thread.Sleep(61);
-            _tracer.StartTrace();
+            _tracer.StopTrace();
         }
     }
 }

@@ -14,12 +14,19 @@ namespace TracerExample
             _tracer = new Tracer();
             MainExample first = new MainExample(_tracer);
             first.Execution();
-
-            Thread thread = new Thread(first.Death);
-            thread.Start();
-
             ExtraExample second = new ExtraExample(_tracer);
             second.Life();
+
+            Thread deathThread = new Thread(first.Death);
+            deathThread.Start();
+            Thread breatheThread = new Thread(second.Breathe);
+            breatheThread.Start();
+
+            deathThread.Join();
+            breatheThread.Join();
+
+            first.Death();
+            second.Eat();
 
             TraceResult result = _tracer.GetTraceResult();
             OutputResults(result);
