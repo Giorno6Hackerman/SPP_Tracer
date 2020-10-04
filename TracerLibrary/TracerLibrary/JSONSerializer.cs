@@ -1,20 +1,29 @@
 ﻿using System;
 using System.IO;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace TracerLibrary
 {
     public class JSONSerializer : ISatanSerializer
     {
-        private Type _type;
+        JsonSerializer _serializer;
+
         public JSONSerializer(Type type)
         {
-            _type = type;
+            _serializer = new JsonSerializer();
         }
 
-        public void Serialize(Stream data, object[] graph)
+        public void Serialize(Stream data, TraceResult result)
         {
-            JsonSerializer.SerializeAsync(data, graph, _type);
+            try
+            {
+                StreamWriter writer = new StreamWriter(data);
+                _serializer.Serialize(writer, result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
     }

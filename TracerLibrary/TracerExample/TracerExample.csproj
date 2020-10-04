@@ -44,13 +44,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="ExtraExample.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="IWriter.cs" />
+    <Compile Include="MainExample.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TracerLibrary\TracerLibrary.csproj">
+      <Project>{379FB573-476A-4543-A49D-3F49843383EA}</Project>
+      <Name>TracerLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

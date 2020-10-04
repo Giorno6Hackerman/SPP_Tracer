@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace TracerLibrary
 {
     [Serializable]
+    [DataContract()]
     public class MethodInfo
     {
         private string _name;
@@ -14,6 +16,7 @@ namespace TracerLibrary
         private List<MethodInfo> _nestedMethods;
 
         [XmlAttribute]
+        [DataMember()]
         public string Name
         {
             get
@@ -25,6 +28,7 @@ namespace TracerLibrary
         }
 
         [XmlAttribute]
+        [DataMember()]
         public string ClassName
         {
             get
@@ -36,12 +40,26 @@ namespace TracerLibrary
         }
 
         [XmlAttribute]
+        [DataMember()]
         public long Time
         {
             get
             {
                 return _timer.ElapsedMilliseconds;
             }
+
+            private set { }
+        }
+
+        [DataMember()]
+        public List<MethodInfo> NestedMethods
+        {
+            get
+            {
+                return _nestedMethods;
+            }
+
+            private set { }
         }
 
         
@@ -54,8 +72,8 @@ namespace TracerLibrary
 
         public MethodInfo(string name, string className)
         {
-            Name = name;
-            ClassName = className;
+            _name = name;
+            _className = className;
             _timer = new Stopwatch();
             _nestedMethods = new List<MethodInfo>();
         }
