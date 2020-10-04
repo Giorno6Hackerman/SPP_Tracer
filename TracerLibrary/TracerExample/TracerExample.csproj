@@ -43,9 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleWriter.cs" />
     <Compile Include="ExtraExample.cs" />
-    <Compile Include="FileWriter.cs" />
+    <Compile Include="ResultWriter.cs" />
     <Compile Include="IWriter.cs" />
     <Compile Include="MainExample.cs" />
     <Compile Include="Program.cs" />

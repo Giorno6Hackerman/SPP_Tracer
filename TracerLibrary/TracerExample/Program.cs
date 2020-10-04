@@ -25,14 +25,9 @@ namespace TracerExample
             xmlSerial.Serialize(xmlStream, result);
             xmlStream.Position = 0;
 
-            IWriter writer = new FileWriter();
+            IWriter writer = new ResultWriter();
             writer.WriteData(xmlStream, Console.Out);
             xmlStream.Position = 0;
-            StreamWriter xmlFile = new StreamWriter(File.Create("traceresult.xml"));
-            writer.WriteData(xmlStream, xmlFile);
-
-            xmlStream.Close();
-            xmlFile.Close();
 
             MemoryStream jsonStream = new MemoryStream();
             JSONSerializer jsonSerial = new JSONSerializer(typeof(TraceResult));
@@ -41,6 +36,14 @@ namespace TracerExample
 
             writer.WriteData(jsonStream, Console.Out);
             jsonStream.Position = 0;
+
+
+            StreamWriter xmlFile = new StreamWriter(File.Create("traceresult.xml"));
+            writer.WriteData(xmlStream, xmlFile);
+
+            xmlStream.Close();
+            xmlFile.Close();
+
             StreamWriter jsonFile = new StreamWriter(File.Create("traceresult.json"));
             writer.WriteData(jsonStream, jsonFile);
 
