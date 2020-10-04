@@ -7,36 +7,38 @@ namespace TracerExample
 {
     class Program
     {
+        private static Tracer _tracer;
+
         static void Main(string[] args)
         {
-            Tracer tracer = new Tracer();
-            MainExample first = new MainExample(tracer);
+            _tracer = new Tracer();
+            MainExample first = new MainExample(_tracer);
             first.Execution();
 
-            Thread firstThread = new Thread(first.Death);
-            firstThread.Start();
+            Thread thread = new Thread(first.Death);
+            thread.Start();
 
-            Thread secondThread = new Thread(first.Suffering);
-            secondThread.Start();
+            ExtraExample second = new ExtraExample(_tracer);
+            second.Life();
 
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = _tracer.GetTraceResult();
+            OutputResults(result);
+        }
+
+        private static void OutputResults(TraceResult result)
+        {
             MemoryStream xmlStream = new MemoryStream();
             XMLSerializer xmlSerial = new XMLSerializer(typeof(TraceResult));
             xmlSerial.Serialize(xmlStream, result);
-            xmlStream.Position = 0;
 
             IWriter writer = new ResultWriter();
             writer.WriteData(xmlStream, Console.Out);
-            xmlStream.Position = 0;
 
             MemoryStream jsonStream = new MemoryStream();
             JSONSerializer jsonSerial = new JSONSerializer(typeof(TraceResult));
             jsonSerial.Serialize(jsonStream, result);
-            jsonStream.Position = 0;
 
             writer.WriteData(jsonStream, Console.Out);
-            jsonStream.Position = 0;
-
 
             StreamWriter xmlFile = new StreamWriter(File.Create("traceresult.xml"));
             writer.WriteData(xmlStream, xmlFile);
@@ -49,7 +51,6 @@ namespace TracerExample
 
             jsonStream.Close();
             jsonFile.Close();
-
         }
     }
 }

@@ -12,8 +12,9 @@ namespace TracerExample
 
         public void WriteData(Stream data, TextWriter stream)
         {
+            data.Position = 0;
             StreamReader reader = new StreamReader(data);
-
+            
             try
             {
                 Console.SetOut(stream);

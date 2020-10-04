@@ -1,30 +1,26 @@
 ﻿using System;
 using System.IO;
-using Newtonsoft.Json;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Xml;
 
 namespace TracerLibrary
 {
     public class JSONSerializer : ISatanSerializer
     {
-        JsonSerializer _serializer;
+        DataContractJsonSerializer _serializer;
 
         public JSONSerializer(Type type)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.Formatting = Formatting.Indented;
-            _serializer = JsonSerializer.Create(settings);
+            _serializer = new DataContractJsonSerializer(type);
         }
 
         public void Serialize(Stream data, TraceResult result)
         {
-            try
+            DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
+            using (XmlDictionaryWriter writer = JsonReaderWriterFactory.CreateJsonWriter(data, Encoding.UTF8, false, true))
             {
-                StreamWriter writer = new StreamWriter(data);
-                _serializer.Serialize(writer, result);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                _serializer.WriteObject(writer, result);
             }
         }
 
