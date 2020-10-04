@@ -7,10 +7,16 @@ namespace TracerExample
     {
         public void WriteData(Stream data, TextWriter stream)
         {
-            Console.SetOut(stream);
             StreamWriter writer = new StreamWriter(data);
-            Console.Write(writer);
-            writer.Close();
+            try
+            {
+                Console.SetOut(stream);
+                Console.Write(writer);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
