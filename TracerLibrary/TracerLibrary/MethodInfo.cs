@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace TracerLibrary
 {
@@ -12,17 +13,7 @@ namespace TracerLibrary
         private Stopwatch _timer;
         private List<MethodInfo> _nestedMethods;
 
-
-        public string ClassName
-        {
-            get
-            {
-                return _className;
-            }
-
-            private set { }
-        }
-
+        [XmlAttribute]
         public string Name
         {
             get
@@ -33,6 +24,18 @@ namespace TracerLibrary
             private set { }
         }
 
+        [XmlAttribute]
+        public string ClassName
+        {
+            get
+            {
+                return _className;
+            }
+
+            private set { }
+        }
+
+        [XmlAttribute]
         public long Time
         {
             get
@@ -41,13 +44,13 @@ namespace TracerLibrary
             }
         }
 
-        /*
+        
         public MethodInfo()
         {
             _timer = new Stopwatch();
             _nestedMethods = new List<MethodInfo>();
         }
-        */
+        
 
         public MethodInfo(string name, string className)
         {
