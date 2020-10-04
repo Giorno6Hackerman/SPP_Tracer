@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace TracerExample
 {
     public class FileWriter : IWriter
     {
+        public void WriteData(Stream data, TextWriter stream)
+        {
+            Console.SetOut(stream);
+            StreamWriter writer = new StreamWriter(data);
+            Console.Write(writer);
+        }
     }
 }
