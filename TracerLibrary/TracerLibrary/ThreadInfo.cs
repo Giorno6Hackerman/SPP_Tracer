@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TracerLibrary
 {
+    [Serializable]
     public class ThreadInfo
     {
         private int _id;
         private long _time;
-        private List<MethodInfo> methods;
-        private Stack<MethodInfo> stack;
+        private List<MethodInfo> _methods;
+        private Stack<MethodInfo> _stack;
 
         public int Id
         {
@@ -24,7 +26,7 @@ namespace TracerLibrary
             get
             {
                 _time = 0;
-                foreach (MethodInfo method in methods)
+                foreach (MethodInfo method in _methods)
                 {
                     _time += method.Time;
                 }
@@ -32,30 +34,38 @@ namespace TracerLibrary
             }
         }
 
+        /*
+        public ThreadInfo()
+        {
+            _methods = new List<MethodInfo>();
+            _stack = new Stack<MethodInfo>();
+        }
+        */
+
         public ThreadInfo(int id)
         {
             Id = id;
-            methods = new List<MethodInfo>();
-            stack = new Stack<MethodInfo>();
+            _methods = new List<MethodInfo>();
+            _stack = new Stack<MethodInfo>();
         }
 
         public void AddMethod(MethodInfo method)
         {
-            if (stack.Count > 0)
+            if (_stack.Count > 0)
             {
-                stack.Peek().AddNestedMethod(method);
+                _stack.Peek().AddNestedMethod(method);
             }
             else
             {
-                methods.Add(method);
+                _methods.Add(method);
             }
 
-            stack.Push(method);
+            _stack.Push(method);
         }
 
         public MethodInfo DeleteMethod()
         {
-            return stack.Pop();
+            return _stack.Pop();
         }
     }
 }

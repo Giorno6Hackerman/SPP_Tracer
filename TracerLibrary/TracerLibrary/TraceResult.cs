@@ -1,8 +1,10 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
 
 namespace TracerLibrary
 {
+    [Serializable]
     public class TraceResult
     {
         // Thread's id and info.
@@ -25,9 +27,12 @@ namespace TracerLibrary
             return thread;
         }
 
-        public ImmutableList<ThreadInfo> GetThreadList()
+        public ImmutableList<ThreadInfo> ThreadList
         {
-            return ImmutableList<ThreadInfo>.Empty.AddRange(threads.Values);
+            get
+            {
+                return ImmutableList<ThreadInfo>.Empty.AddRange(threads.Values);
+            }
         }
     }
 }

@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace TracerLibrary
 {
+    [Serializable]
     public class MethodInfo
     {
         private string _name;
         private string _className;
         private Stopwatch _timer;
         private List<MethodInfo> _nestedMethods;
+
 
         public string ClassName
         {
@@ -37,6 +40,14 @@ namespace TracerLibrary
                 return _timer.ElapsedMilliseconds;
             }
         }
+
+        /*
+        public MethodInfo()
+        {
+            _timer = new Stopwatch();
+            _nestedMethods = new List<MethodInfo>();
+        }
+        */
 
         public MethodInfo(string name, string className)
         {
