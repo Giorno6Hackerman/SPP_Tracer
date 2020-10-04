@@ -4,6 +4,6 @@ namespace TracerLibrary
 {
     public interface ISatanSerializer
     {
-        void Serialize(Stream data, object[] graph);
+        void Serialize(Stream data, TraceResult result);
     }
 }

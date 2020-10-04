@@ -3,9 +3,9 @@ using System.IO;
 
 namespace TracerExample
 {
-    public class FileWriter : IWriter
+    public class ResultWriter : IWriter
     {
-        public FileWriter()
+        public ResultWriter()
         {
            
         }
@@ -17,7 +17,7 @@ namespace TracerExample
             try
             {
                 Console.SetOut(stream);
-                Console.Write(reader.ReadToEnd());
+                Console.WriteLine(reader.ReadToEnd());
             }
             catch (Exception ex)
             {

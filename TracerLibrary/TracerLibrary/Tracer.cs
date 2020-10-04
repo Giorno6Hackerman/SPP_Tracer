@@ -15,8 +15,8 @@ namespace TracerLibrary
         public void StartTrace()
         {
             var trace = new StackTrace();
-            string methodName = trace.GetFrame(trace.FrameCount - 1).GetMethod().Name;
-            string className = trace.GetFrame(trace.FrameCount - 1).GetMethod().DeclaringType.Name;
+            string methodName = trace.GetFrame(trace.FrameCount - 2).GetMethod().Name;
+            string className = trace.GetFrame(trace.FrameCount - 2).GetMethod().DeclaringType.Name;
             var method = new MethodInfo(methodName, className);
             result.GetThread(Thread.CurrentThread.ManagedThreadId).AddMethod(method);
             method.StartTimer();

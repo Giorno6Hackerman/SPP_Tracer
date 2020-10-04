@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
 
 namespace TracerLibrary
 {
     [Serializable]
+    [DataContract()]
     public class TraceResult
     {
         // Thread's id and info.
@@ -27,12 +30,15 @@ namespace TracerLibrary
             return thread;
         }
 
+        [DataMember()]
         public ImmutableList<ThreadInfo> ThreadList
         {
             get
             {
                 return ImmutableList<ThreadInfo>.Empty.AddRange(threads.Values);
             }
+
+            private set { }
         }
     }
 }

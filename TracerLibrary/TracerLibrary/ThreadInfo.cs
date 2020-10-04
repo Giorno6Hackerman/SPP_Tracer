@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace TracerLibrary
 {
     [Serializable]
+    [DataContract()]
     public class ThreadInfo
     {
         private int _id;
@@ -11,6 +14,7 @@ namespace TracerLibrary
         private List<MethodInfo> _methods;
         private Stack<MethodInfo> _stack;
 
+        [DataMember()]
         public int Id
         {
             get
@@ -21,6 +25,7 @@ namespace TracerLibrary
             private set {}
         }
 
+        [DataMember()]
         public long Time
         {
             get
@@ -32,19 +37,31 @@ namespace TracerLibrary
                 }
                 return _time;
             }
+
+            private set { }
         }
 
-        /*
+        [DataMember()]
+        public List<MethodInfo> Methods
+        {
+            get
+            {
+                return _methods;
+            }
+
+            private set { }
+        }
+
         public ThreadInfo()
         {
             _methods = new List<MethodInfo>();
             _stack = new Stack<MethodInfo>();
         }
-        */
+        
 
         public ThreadInfo(int id)
         {
-            Id = id;
+            _id = id;
             _methods = new List<MethodInfo>();
             _stack = new Stack<MethodInfo>();
         }
