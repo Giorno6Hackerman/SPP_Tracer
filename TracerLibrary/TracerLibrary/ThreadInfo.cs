@@ -15,6 +15,7 @@ namespace TracerLibrary
         private Stack<MethodInfo> _stack;
 
         [DataMember()]
+        [XmlAttribute]
         public int Id
         {
             get
@@ -26,6 +27,7 @@ namespace TracerLibrary
         }
 
         [DataMember()]
+        [XmlAttribute]
         public long Time
         {
             get

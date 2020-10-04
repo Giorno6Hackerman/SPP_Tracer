@@ -11,14 +11,12 @@ namespace TracerLibrary
     public class XMLSerializer : ISatanSerializer
     {
         private DataContractSerializer _serializer;
-        //private XmlSerializer _serializer;
 
         public XMLSerializer(Type type)
         {
             try
             {
                 _serializer = new DataContractSerializer(type);
-                //_serializer = new XmlSerializer(type);
             }
             catch (Exception ex)
             {
@@ -30,9 +28,14 @@ namespace TracerLibrary
         {
             try
             {
-                XmlWriter writer = new XmlTextWriter(data, Encoding.UTF8);
-                _serializer.WriteObject(data, result);
-                //_serializer.Serialize(data, graph);
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                //settings.Encoding = Encoding.UTF8;
+                //settings.IndentChars = "\t";
+                //settings.NewLineChars = "\r\n";
+                //settings.NewLineHandling = NewLineHandling.Replace;
+                XmlWriter writer = XmlWriter.Create(data, settings);
+                _serializer.WriteObject(writer, result);
             }
             catch (Exception ex)
             {

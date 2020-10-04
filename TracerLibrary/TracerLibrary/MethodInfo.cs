@@ -15,8 +15,8 @@ namespace TracerLibrary
         private Stopwatch _timer;
         private List<MethodInfo> _nestedMethods;
 
-        [XmlAttribute]
         [DataMember()]
+        [XmlAttribute]
         public string Name
         {
             get
@@ -27,8 +27,8 @@ namespace TracerLibrary
             private set { }
         }
 
-        [XmlAttribute]
         [DataMember()]
+        [XmlAttribute]
         public string ClassName
         {
             get
@@ -39,8 +39,8 @@ namespace TracerLibrary
             private set { }
         }
 
-        [XmlAttribute]
         [DataMember()]
+        [XmlAttribute]
         public long Time
         {
             get

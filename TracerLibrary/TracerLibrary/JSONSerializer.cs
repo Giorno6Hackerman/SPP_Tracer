@@ -10,7 +10,9 @@ namespace TracerLibrary
 
         public JSONSerializer(Type type)
         {
-            _serializer = new JsonSerializer();
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.Formatting = Formatting.Indented;
+            _serializer = JsonSerializer.Create(settings);
         }
 
         public void Serialize(Stream data, TraceResult result)
