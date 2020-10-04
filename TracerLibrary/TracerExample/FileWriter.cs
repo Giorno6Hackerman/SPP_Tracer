@@ -10,6 +10,7 @@ namespace TracerExample
             Console.SetOut(stream);
             StreamWriter writer = new StreamWriter(data);
             Console.Write(writer);
+            writer.Close();
         }
     }
 }
